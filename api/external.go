@@ -452,6 +452,8 @@ func (a *API) Provider(ctx context.Context, name string, scopes string) (provide
 		return provider.NewGoogleProvider(config.External.Google, scopes)
 	case "keycloak":
 		return provider.NewKeycloakProvider(config.External.Keycloak, scopes)
+	case "luxbs":
+		return provider.NewLuxbsProvider(config.External.Luxbs, scopes)
 	case "linkedin":
 		return provider.NewLinkedinProvider(config.External.Linkedin, scopes)
 	case "facebook":

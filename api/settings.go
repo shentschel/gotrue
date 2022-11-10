@@ -10,6 +10,7 @@ type ProviderSettings struct {
 	GitHub    bool `json:"github"`
 	GitLab    bool `json:"gitlab"`
 	Keycloak  bool `json:"keycloak"`
+	Luxbs     bool `json:"luxbs"`
 	Google    bool `json:"google"`
 	Linkedin  bool `json:"linkedin"`
 	Facebook  bool `json:"facebook"`
@@ -47,6 +48,7 @@ func (a *API) Settings(w http.ResponseWriter, r *http.Request) error {
 			GitLab:    config.External.Gitlab.Enabled,
 			Google:    config.External.Google.Enabled,
 			Keycloak:  config.External.Keycloak.Enabled,
+			Luxbs:     config.External.Luxbs.Enabled,
 			Linkedin:  config.External.Linkedin.Enabled,
 			Facebook:  config.External.Facebook.Enabled,
 			Notion:    config.External.Notion.Enabled,

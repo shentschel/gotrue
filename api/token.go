@@ -110,6 +110,10 @@ func (p *IdTokenGrantParams) getVerifier(ctx context.Context, config *conf.Globa
 		oAuthProvider = config.External.Keycloak
 		oAuthProviderClientId = oAuthProvider.ClientID
 		provider, err = oidc.NewProvider(ctx, oAuthProvider.URL)
+	case "luxbs":
+		oAuthProvider = config.External.Luxbs
+		oAuthProviderClientId = oAuthProvider.ClientID
+		provider, err = oidc.NewProvider(ctx, oAuthProvider.URL)
 	default:
 		return nil, fmt.Errorf("Provider %s doesn't support the id_token grant flow", p.Provider)
 	}

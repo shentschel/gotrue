@@ -140,6 +140,7 @@ type ProviderConfiguration struct {
 	Google      OAuthProviderConfiguration `json:"google"`
 	Notion      OAuthProviderConfiguration `json:"notion"`
 	Keycloak    OAuthProviderConfiguration `json:"keycloak"`
+	Luxbs       OAuthProviderConfiguration `json:"luxbs"`
 	Linkedin    OAuthProviderConfiguration `json:"linkedin"`
 	Spotify     OAuthProviderConfiguration `json:"spotify"`
 	Slack       OAuthProviderConfiguration `json:"slack"`
