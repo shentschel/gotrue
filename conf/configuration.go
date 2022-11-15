@@ -19,13 +19,15 @@ const defaultChallengeExpiryDuration float64 = 300
 
 // OAuthProviderConfiguration holds all config related to external account providers.
 type OAuthProviderConfiguration struct {
-	ClientID    string `json:"client_id" split_words:"true"`
-	Secret      string `json:"secret"`
-	RedirectURI string `json:"redirect_uri" split_words:"true"`
-	URL         string `json:"url"`
-	ApiURL      string `json:"api_url" split_words:"true"`
-	Enabled     bool   `json:"enabled"`
-	Path        string `json:"path" split_words:"true"`
+	ClientID              string `json:"client_id" split_words:"true"`
+	Secret                string `json:"secret"`
+	RedirectURI           string `json:"redirect_uri" split_words:"true"`
+	URL                   string `json:"url"`
+	ApiURL                string `json:"api_url" split_words:"true"`
+	AuthorizationEndpoint string `json:"authorization_endpoint" split_words:"true"`
+	TokenEndpoint         string `json:"token_endpoint" split_words:"true"`
+	UserinfoEndpoint      string `json:"userinfo_endpoint" split_words:"true"`
+	Enabled               bool   `json:"enabled"`
 }
 
 type EmailProviderConfiguration struct {

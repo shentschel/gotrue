@@ -937,7 +937,7 @@
         },
         "custom": {
           "type": "boolean",
-          "x-go-name": "custom"
+          "x-go-name": "Custom"
         },
         "linkedin": {
           "type": "boolean",

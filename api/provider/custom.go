@@ -11,16 +11,16 @@ import (
 // Custom
 type CustomProvider struct {
 	*oauth2.Config
-	Host string
-	Path string
+	Host             string
+	UserInfoEndpoint string
 }
 
 type CustomUser struct {
-	Name          string     `json:"name"`
-	Sub           string     `json:"sub"`
-	Email         string     `json:"email"`
-	EmailVerified bool       `json:"email_verified"`
-	Role          CustomRole `json:"role"`
+	Name          string       `json:"name"`
+	Sub           string       `json:"sub"`
+	Email         string       `json:"email"`
+	EmailVerified bool         `json:"email_verified"`
+	Role          []CustomRole `json:"role"`
 }
 
 type CustomRole struct {
@@ -57,14 +57,14 @@ func NewCustomProvider(ext conf.OAuthProviderConfiguration, scopes string) (OAut
 			ClientID:     ext.ClientID,
 			ClientSecret: ext.Secret,
 			Endpoint: oauth2.Endpoint{
-				AuthURL:  ext.URL + ext.Path + "/auth",
-				TokenURL: ext.URL + ext.Path + "/token",
+				AuthURL:  ext.URL + ext.AuthorizationEndpoint,
+				TokenURL: ext.URL + ext.TokenEndpoint,
 			},
 			RedirectURL: ext.RedirectURI,
 			Scopes:      oauthScopes,
 		},
-		Host: ext.URL,
-		Path: ext.Path,
+		Host:             ext.URL,
+		UserInfoEndpoint: ext.UserinfoEndpoint,
 	}, nil
 }
 
@@ -75,7 +75,7 @@ func (g CustomProvider) GetOAuthToken(code string) (*oauth2.Token, error) {
 func (g CustomProvider) GetUserData(ctx context.Context, tok *oauth2.Token) (*UserProvidedData, error) {
 	var u CustomUser
 
-	if err := makeRequest(ctx, tok, g.Config, g.Host+g.Path+"/userinfo", &u); err != nil {
+	if err := makeRequest(ctx, tok, g.Config, g.Host+g.UserInfoEndpoint, &u); err != nil {
 		return nil, err
 	}
 
