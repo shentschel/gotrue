@@ -3,7 +3,6 @@ package conf
 import (
 	"errors"
 	"fmt"
-	"github.com/netlify/gotrue/api/provider"
 	"net/url"
 	"os"
 	"strings"
@@ -26,6 +25,7 @@ type OAuthProviderConfiguration struct {
 	URL         string `json:"url"`
 	ApiURL      string `json:"api_url" split_words:"true"`
 	Enabled     bool   `json:"enabled"`
+	Path        string `json:"path" split_words:"true"`
 }
 
 type EmailProviderConfiguration struct {
@@ -134,6 +134,7 @@ type ProviderConfiguration struct {
 	Apple       OAuthProviderConfiguration `json:"apple"`
 	Azure       OAuthProviderConfiguration `json:"azure"`
 	Bitbucket   OAuthProviderConfiguration `json:"bitbucket"`
+	Custom      OAuthProviderConfiguration `json:"custom"`
 	Discord     OAuthProviderConfiguration `json:"discord"`
 	Facebook    OAuthProviderConfiguration `json:"facebook"`
 	Github      OAuthProviderConfiguration `json:"github"`
@@ -152,8 +153,6 @@ type ProviderConfiguration struct {
 	Zoom        OAuthProviderConfiguration `json:"zoom"`
 	IosBundleId string                     `json:"ios_bundle_id" split_words:"true"`
 	RedirectURL string                     `json:"redirect_url"`
-
-	Custom provider.CustomProviderConfiguration `json:"custom"`
 }
 
 type SMTPConfiguration struct {

@@ -15,11 +15,6 @@ type CustomProvider struct {
 	Path string
 }
 
-type CustomProviderConfiguration struct {
-	conf.OAuthProviderConfiguration
-	Path string `json:"path" split_words:"true"`
-}
-
 type CustomUser struct {
 	Name          string     `json:"name"`
 	Sub           string     `json:"sub"`
@@ -34,7 +29,7 @@ type CustomRole struct {
 }
 
 // NewCustomProvider creates a Custom account provider.
-func NewCustomProvider(ext CustomProviderConfiguration, scopes string) (OAuthProvider, error) {
+func NewCustomProvider(ext conf.OAuthProviderConfiguration, scopes string) (OAuthProvider, error) {
 	if err := ext.Validate(); err != nil {
 		return nil, err
 	}

@@ -6,7 +6,6 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	CustomProvider "github.com/netlify/gotrue/api/provider"
 	"net/http"
 	"net/url"
 	"strconv"
@@ -112,10 +111,9 @@ func (p *IdTokenGrantParams) getVerifier(ctx context.Context, config *conf.Globa
 		oAuthProviderClientId = oAuthProvider.ClientID
 		provider, err = oidc.NewProvider(ctx, oAuthProvider.URL)
 	case "custom":
-		var customOAuthProvider CustomProvider.CustomProviderConfiguration
-		customOAuthProvider = config.External.Custom
+		oAuthProvider = config.External.Custom
 		oAuthProviderClientId = oAuthProvider.ClientID
-		provider, err = oidc.NewProvider(ctx, customOAuthProvider.URL)
+		provider, err = oidc.NewProvider(ctx, oAuthProvider.URL)
 	default:
 		return nil, fmt.Errorf("provider %s doesn't support the id_token grant flow", p.Provider)
 	}
