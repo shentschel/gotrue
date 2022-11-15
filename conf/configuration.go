@@ -3,6 +3,7 @@ package conf
 import (
 	"errors"
 	"fmt"
+	"github.com/netlify/gotrue/api/provider"
 	"net/url"
 	"os"
 	"strings"
@@ -140,7 +141,6 @@ type ProviderConfiguration struct {
 	Google      OAuthProviderConfiguration `json:"google"`
 	Notion      OAuthProviderConfiguration `json:"notion"`
 	Keycloak    OAuthProviderConfiguration `json:"keycloak"`
-	Luxbs       OAuthProviderConfiguration `json:"luxbs"`
 	Linkedin    OAuthProviderConfiguration `json:"linkedin"`
 	Spotify     OAuthProviderConfiguration `json:"spotify"`
 	Slack       OAuthProviderConfiguration `json:"slack"`
@@ -152,6 +152,8 @@ type ProviderConfiguration struct {
 	Zoom        OAuthProviderConfiguration `json:"zoom"`
 	IosBundleId string                     `json:"ios_bundle_id" split_words:"true"`
 	RedirectURL string                     `json:"redirect_url"`
+
+	Custom provider.CustomProviderConfiguration `json:"custom"`
 }
 
 type SMTPConfiguration struct {

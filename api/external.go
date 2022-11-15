@@ -431,7 +431,7 @@ func (a *API) loadExternalState(ctx context.Context, state string) (context.Cont
 }
 
 // Provider returns a Provider interface for the given name.
-func (a *API) Provider(ctx context.Context, name string, scopes string) (provider.Provider, error) {
+func (a *API) Provider(_ context.Context, name string, scopes string) (provider.Provider, error) {
 	config := a.config
 	name = strings.ToLower(name)
 
@@ -452,8 +452,8 @@ func (a *API) Provider(ctx context.Context, name string, scopes string) (provide
 		return provider.NewGoogleProvider(config.External.Google, scopes)
 	case "keycloak":
 		return provider.NewKeycloakProvider(config.External.Keycloak, scopes)
-	case "luxbs":
-		return provider.NewLuxbsProvider(config.External.Luxbs, scopes)
+	case "custom":
+		return provider.NewCustomProvider(config.External.Custom, scopes)
 	case "linkedin":
 		return provider.NewLinkedinProvider(config.External.Linkedin, scopes)
 	case "facebook":

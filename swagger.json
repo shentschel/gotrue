@@ -935,9 +935,9 @@
           "type": "boolean",
           "x-go-name": "Keycloak"
         },
-        "luxbs": {
+        "custom": {
           "type": "boolean",
-          "x-go-name": "luxbs"
+          "x-go-name": "custom"
         },
         "linkedin": {
           "type": "boolean",

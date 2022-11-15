@@ -10,7 +10,7 @@ type ProviderSettings struct {
 	GitHub    bool `json:"github"`
 	GitLab    bool `json:"gitlab"`
 	Keycloak  bool `json:"keycloak"`
-	Luxbs     bool `json:"luxbs"`
+	Custom    bool `json:"custom"`
 	Google    bool `json:"google"`
 	Linkedin  bool `json:"linkedin"`
 	Facebook  bool `json:"facebook"`
@@ -35,7 +35,7 @@ type Settings struct {
 	MFAEnabled        bool             `json:"mfa_enabled"`
 }
 
-func (a *API) Settings(w http.ResponseWriter, r *http.Request) error {
+func (a *API) Settings(w http.ResponseWriter, _ *http.Request) error {
 	config := a.config
 
 	return sendJSON(w, http.StatusOK, &Settings{
@@ -48,7 +48,7 @@ func (a *API) Settings(w http.ResponseWriter, r *http.Request) error {
 			GitLab:    config.External.Gitlab.Enabled,
 			Google:    config.External.Google.Enabled,
 			Keycloak:  config.External.Keycloak.Enabled,
-			Luxbs:     config.External.Luxbs.Enabled,
+			Custom:    config.External.Custom.Enabled,
 			Linkedin:  config.External.Linkedin.Enabled,
 			Facebook:  config.External.Facebook.Enabled,
 			Notion:    config.External.Notion.Enabled,

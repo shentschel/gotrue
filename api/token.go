@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	CustomProvider "github.com/netlify/gotrue/api/provider"
 	"net/http"
 	"net/url"
 	"strconv"
@@ -93,11 +94,11 @@ func (p *IdTokenGrantParams) getVerifier(ctx context.Context, config *conf.Globa
 	case "azure":
 		oAuthProvider = config.External.Azure
 		oAuthProviderClientId = oAuthProvider.ClientID
-		url := oAuthProvider.URL
-		if url == "" {
-			url = "https://login.microsoftonline.com/common"
+		azureUrl := oAuthProvider.URL
+		if azureUrl == "" {
+			azureUrl = "https://login.microsoftonline.com/common"
 		}
-		provider, err = oidc.NewProvider(ctx, url+"/v2.0")
+		provider, err = oidc.NewProvider(ctx, azureUrl+"/v2.0")
 	case "facebook":
 		oAuthProvider = config.External.Facebook
 		oAuthProviderClientId = oAuthProvider.ClientID
@@ -110,12 +111,13 @@ func (p *IdTokenGrantParams) getVerifier(ctx context.Context, config *conf.Globa
 		oAuthProvider = config.External.Keycloak
 		oAuthProviderClientId = oAuthProvider.ClientID
 		provider, err = oidc.NewProvider(ctx, oAuthProvider.URL)
-	case "luxbs":
-		oAuthProvider = config.External.Luxbs
+	case "custom":
+		var customOAuthProvider CustomProvider.CustomProviderConfiguration
+		customOAuthProvider = config.External.Custom
 		oAuthProviderClientId = oAuthProvider.ClientID
-		provider, err = oidc.NewProvider(ctx, oAuthProvider.URL)
+		provider, err = oidc.NewProvider(ctx, customOAuthProvider.URL)
 	default:
-		return nil, fmt.Errorf("Provider %s doesn't support the id_token grant flow", p.Provider)
+		return nil, fmt.Errorf("provider %s doesn't support the id_token grant flow", p.Provider)
 	}
 
 	if err != nil {
